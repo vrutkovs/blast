@@ -69,9 +69,12 @@ def get_reddit():
     Creates a PRAW instance based on the client ID and client secret
     """
     client_id, client_secret = read_reddit_secret()
-    return praw.Reddit(user_agent='catcatgo_parser',
-                       client_id=client_id,
-                       client_secret=client_secret)
+    reddit = praw.Reddit(user_agent='catcatgo_parser',
+                         client_id=client_id,
+                         client_secret=client_secret)
+    # Verify authentication
+    reddit.user.me()
+    return reddit
 
 def get_mongo_client(mongodb_params):
     client = MongoClient('mongodb://{user}:{passwd}@{host}:{port}/{db}'
