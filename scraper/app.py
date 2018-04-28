@@ -4,7 +4,7 @@ import random
 import sys
 import traceback
 import kubernetes.client as k8s
-from base64 import b64decode
+from base64 import standard_b64decode
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
 
@@ -60,7 +60,7 @@ def read_reddit_secret():
     result = {}
     for item in ['client_id', 'client_secret', 'username', 'password']:
         encoded = praw_secret.data[item]
-        result[item] = b64decode(item)
+        result[item] = standard_b64decode(item)
 
     return list(result.values())
 
