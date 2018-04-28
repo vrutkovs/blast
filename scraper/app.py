@@ -83,7 +83,10 @@ def get_mongo_client(mongodb_params):
 def save_item(client, db_name, collection_name, title, url):
     db = client.get_database(db_name)
     collection = db.get_collection(collection_name)
-    collection.update({'title': title, 'url': url}, upsert=True)
+    # Use URL as a key, so that we wouldn't insert duplicates
+    key = {'url': url}
+    data = {'title': title};
+    collection.update(key, data, upsert=True)
 
 
 if __name__ == '__main__':
