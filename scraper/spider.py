@@ -20,12 +20,13 @@ class DataSpider(CrawlSpider):
         Rule(LinkExtractor(restrict_xpaths="//h3[@class='r']"), callback='parse_item'),
     )
 
-    def __init__(self, textdb=None, *a, **kw):
+    def __init__(self, mongodb_params=None, *a, **kw):
         super(DataSpider, self).__init__(*a, **kw)
         try:
-            self.client = MongoClient('mongodb://{user}:{passwd}@{host}:{port}/blast_text'
-                .format(**textdb))
+            self.client = MongoClient('mongodb://{user}:{passwd}@{host}:{port}/{db}'
+                .format(**mongodb_params))
             self.client.server_info()
+            self.database_name = mongodb_params['db']
         except ServerSelectionTimeoutError:
             self.logger.error("Could not connect to mongo (timeout), nothing will be saved!")
             self.client = None
@@ -47,7 +48,7 @@ class DataSpider(CrawlSpider):
         self.logger.info("Saving %s - %s", text, url)
         if self.client:
             try:
-                self.client.blast_text.text.insert_one({'text': text, 'url': url})
+                self.client[self.database_name].text.insert_one({'text': text, 'url': url})
             except Exception as e:
                 self.logger.error("Could not save item: %s", e)
         else:

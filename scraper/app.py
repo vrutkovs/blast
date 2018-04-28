@@ -10,6 +10,7 @@ from spider import DataSpider
 
 WORDS_FILE = 'words.txt'
 SERVICEACCOUNT_LOCATION = '/var/run/secrets/kubernetes.io/serviceaccount/'
+CONFIG_MAP = 'database-params'
 
 def random_word():
     """
@@ -39,18 +40,18 @@ def read_configmap():
     k8s.configuration.api_key_prefix['authorization'] = 'Bearer'
     k8s.configuration.api_key['authorization'] = read_file('token')
     k8s.configuration.ssl_ca_cert = SERVICEACCOUNT_LOCATION + 'ca.crt'
-    # we're getting text's backend configuration
-    obj = k8s.CoreV1Api().read_namespaced_config_map('text', namespace)
+    # we're getting database configuration
+    obj = k8s.CoreV1Api().read_namespaced_config_map(CONFIG_MAP, namespace)
 
-    return obj.data['MONGODB_USER'], obj.data['MONGODB_PASSWORD'], \
-        os.getenv('TEXT_DB_SERVICE_HOST'), os.getenv('TEXT_DB_SERVICE_PORT')
+    return obj.data['MONGODB_USER'], obj.data['MONGODB_PASSWORD'], obj.data['MONGODB_DATABASE'],\
+        os.getenv('DATABASE_SERVICE_HOST'), os.getenv('DATABASE_SERVICE_PORT'),
 
 
 if __name__ == '__main__':
     user, passwd, host, port = 'user', 'password', 'localhost', '27017'
     if 'KUBERNETES_SERVICE_HOST' in os.environ:
         try:
-            user, passwd, host, port = read_configmap()
+            user, passwd, db, host, port = read_configmap()
         except k8s.rest.ApiException as e:
             print("Error reading config map!", file=sys.stderr)
             traceback.print_exc(file=sys.stderr)
@@ -59,5 +60,5 @@ if __name__ == '__main__':
     process = CrawlerProcess()
     process.crawl(DataSpider,
         start_urls=['https://www.google.com/search?q='+word],
-        textdb={'user':user, 'passwd':passwd, 'host':host, 'port':port})
+        mongodb_params={'user': user, 'passwd': passwd, 'host': host, 'port': port, 'db': db})
     process.start()
