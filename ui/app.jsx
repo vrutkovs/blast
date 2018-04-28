@@ -1,3 +1,14 @@
+class Card extends React.Component {
+  render() {
+    return (
+      <p>
+        <h4>{this.props.title}</h4>
+        <img className='card' src={this.props.url} alt={this.props.title} />
+      </p>
+    )
+  }
+}
+
 class SearchResults extends React.Component {
   render() {
     if (this.props.results.length == 0) {
@@ -7,12 +18,9 @@ class SearchResults extends React.Component {
     } else {
       return(
         <div>
-          {this.props.results.map(item => (
-            <p>
-              <span>{item.title}</span>
-              <img src={item.url} alt={item.title}></img>
-            </p>
-          ))}
+          {this.props.results.map(item =>
+            <Card title={item.title} url={item.url} />
+          )}
         </div>
       );
     }
