@@ -8,7 +8,10 @@ class SearchResults extends React.Component {
       return(
         <div>
           {this.props.results.map(item => (
-            <p><span>{item.title}</span>: <span>{item.url}</span></p>
+            <p>
+              <span>{item.title}</span>
+              <img src={item.url} alt={item.title}></img>
+            </p>
           ))}
         </div>
       );
