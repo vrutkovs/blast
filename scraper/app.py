@@ -96,7 +96,7 @@ if __name__ == '__main__':
     # Fetch 10 links and store title and url in mongo
     reddit = get_reddit()
     subreddit_name = os.getenv('SUBREDDIT') or 'aww'
-    subreddit = reddit.get_subreddit(subreddit_name)
+    subreddit = reddit.subreddit(subreddit_name)
     for post in subreddit.get_hot(limit=10):
         try:
             save_item(mongo_client, db, 'url', post.title, post.url)
