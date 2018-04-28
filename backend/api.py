@@ -13,7 +13,7 @@ api.decorators = [cors.crossdomain(
     origin="*", headers=['accept', 'Content-Type'],
     methods=['HEAD', 'OPTIONS', 'GET', 'PUT', 'POST', 'DELETE'])]
 
-class BlastVideo(Resource):
+class CatCatGoBackend(Resource):
 
     def __init__(self):
         if 'DATABASE_SERVICE_HOST' in os.environ:
@@ -35,7 +35,7 @@ class BlastVideo(Resource):
         return items
 
 
-api.add_resource(BlastVideo, '/blast/api/v1.0/video/<string:tag>')
+api.add_resource(CatCatGoBackend, '/api/v1.0/search/<string:tag>')
 
 if __name__ == '__main__':
-    app.run(debug=os.getenv('BLAST_DEBUG')=='True')
+    app.run(debug=os.getenv('CATCATGO_DEBUG')=='True')
