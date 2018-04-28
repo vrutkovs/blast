@@ -48,7 +48,7 @@ class DataSpider(CrawlSpider):
         self.logger.info("Saving %s - %s", text, url)
         if self.client:
             try:
-                self.client[self.database_name].text.insert_one({'text': text, 'url': url})
+                self.client[self.database_name].text.insert_one({'title': text, 'url': url})
             except Exception as e:
                 self.logger.error("Could not save item: %s", e)
         else:
