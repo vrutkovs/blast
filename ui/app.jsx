@@ -1,4 +1,4 @@
-class ImageResults extends React.Component {
+class SearchResults extends React.Component {
   render() {
     if (this.props.results.length == 0) {
       return (
@@ -8,43 +8,7 @@ class ImageResults extends React.Component {
       return(
         <div>
           {this.props.results.map(item => (
-            <p>{item.tag}: {item.obj}</p>
-          ))}
-        </div>
-      );
-    }
-  }
-}
-
-class VideoResults extends React.Component {
-  render() {
-    if (this.props.results.length == 0) {
-      return (
-        <p>Sorry, no results.</p>
-      );
-    } else {
-      return(
-        <div>
-          {this.props.results.map(item => (
-            <p><a href={item.url}>{item.text}</a></p>
-          ))}
-        </div>
-      );
-    }
-  }
-}
-
-class TextResults extends React.Component {
-  render() {
-    if (this.props.results.length == 0) {
-      return (
-        <p>Sorry, no results.</p>
-      );
-    } else {
-      return (
-        <div>
-          {this.props.results.map(item => (
-            <p><a href={item.url}>{item.text}</a></p>
+            <p><span>{item.title}</span>: <span>{item.url}</span></p>
           ))}
         </div>
       );
@@ -100,9 +64,7 @@ class SearchForm extends React.Component {
     super(props);
     this.state = {
       searchInput: '',
-      textResults: [],
-      videoResults: [],
-      imageResults: [],
+      results: [],
     };
 
     this.handleSearchInput = this.handleSearchInput.bind(this);
@@ -124,46 +86,22 @@ class SearchForm extends React.Component {
     var hostname = window.location.hostname
     var postfix = hostname.substring(hostname.indexOf("-"));
 
-    fetch('http://text' + postfix + "/blast/api/v1.0/text/" + this.state.searchInput)
+    fetch('http://api' + postfix + "/api/v1.0/search/" + this.state.searchInput)
       .then(result=>result.json())
-      .then(items=>this.setState({textResults: items}));
-
-    fetch('http://video' + postfix + '/blast/api/v1.0/video/' + this.state.searchInput)
-      .then(result=>result.json())
-      .then(items=>this.setState({videoResults: items}));
-
-    fetch('http://image' + postfix + '/blast/api/v1.0/image/' + this.state.searchInput)
-      .then(result=>result.json())
-      .then(items=>this.setState({imageResults: items}));
+      .then(items=>this.setState({results: items}));
   }
 
   render() {
     return (
       <div>
-        <h3>The Blast</h3>
+        <h3>CatCatGo</h3>
         <SearchBar
           searchInput={this.state.searchInput}
           onSearchInput={this.handleSearchInput}
           onSearchSubmit={this.handleSearchSubmit}
         />
-
         <br />
-
-        <ReactBootstrap.Tabs defaultActiveKey="{1}" id="search-results">
-
-          <ReactBootstrap.Tab eventKey="{1}" title="Text">
-            <TextResults results={this.state.textResults} />
-          </ReactBootstrap.Tab>
-
-          <ReactBootstrap.Tab eventKey="{2}" title="Video">
-            <VideoResults results={this.state.videoResults} />
-          </ReactBootstrap.Tab>
-
-          <ReactBootstrap.Tab eventKey="{3}" title="Image">
-            <ImageResults results={this.state.imageResults} />
-          </ReactBootstrap.Tab>
-
-        </ReactBootstrap.Tabs>
+        <SearchResults results={this.state.results} />
       </div>
     );
   }
