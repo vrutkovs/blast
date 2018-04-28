@@ -23,7 +23,7 @@ class BlastVideo(Resource):
                 os.getenv('DATABASE_SERVICE_PORT'),
                 os.getenv('MONGODB_DATABASE'))
         else:
-            self.db = Mongo('user', 'password', 'localhost', '27017', 'catcatgo_video')
+            self.db = Mongo('user', 'password', 'localhost', '27017', 'catcatgo_db')
 
     def get(self, tag):
         items = []
