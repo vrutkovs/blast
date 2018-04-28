@@ -58,7 +58,7 @@ def read_reddit_secret():
 
     # secrets are base64 encoded
     result = {}
-    for item in ['client_id', 'client_secret', 'username', 'password']:
+    for item in ['client_id', 'client_secret']:
         encoded = praw_secret.data[item]
         result[item] = standard_b64decode(item)
 
@@ -68,13 +68,11 @@ def get_reddit():
     """
     Creates a PRAW instance based on the client ID and client secret
     """
-    client_id, client_secret, reddit_username, reddit_password = read_reddit_secret()
+    client_id, client_secret = read_reddit_secret()
     print(client_id, client_secret, reddit_username, reddit_password)
     return praw.Reddit(user_agent='catcatgo_parser',
                        client_id=client_id,
-                       client_secret=client_secret,
-                       username=reddit_username, \
-                       password=reddit_password)
+                       client_secret=client_secret)
 
 def get_mongo_client(mongodb_params):
     client = MongoClient('mongodb://{user}:{passwd}@{host}:{port}/{db}'
@@ -104,8 +102,7 @@ if __name__ == '__main__':
     # Fetch 10 links and store title and url in mongo
     reddit = get_reddit()
     subreddit_name = os.getenv('SUBREDDIT') or 'aww'
-    subreddit = reddit.subreddit(subreddit_name)
-    for post in subreddit.get_hot(limit=10):
+    for post in reddit.subreddit(subreddit_name).hot(limit=10):
         try:
             save_item(mongo_client, db, 'url', post.title, post.url)
         except Exception as e:
