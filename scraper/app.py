@@ -58,20 +58,18 @@ def read_reddit_secret():
 
     # secrets are base64 encoded
     result = {}
-    for item in ['client_id', 'client_secret']:
+    for item in ['client_id', 'client_secret', 'username', 'password']:
         encoded = praw_secret.data[item]
         result[item] = standard_b64decode(encoded).decode('utf-8')
 
-    return list(result.values())
+    return result
 
 def get_reddit():
     """
     Creates a PRAW instance based on the client ID and client secret
     """
-    client_id, client_secret = read_reddit_secret()
-    reddit = praw.Reddit(user_agent='catcatgo_parser',
-                         client_id=client_id,
-                         client_secret=client_secret)
+    secret = read_reddit_secret()
+    reddit = praw.Reddit(user_agent='catcatgo_parser', **secret)
     # Verify authentication
     reddit.user.me()
     return reddit
