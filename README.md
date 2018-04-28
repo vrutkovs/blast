@@ -1,5 +1,13 @@
-Blast
+CatCatGo
 -----
 
 This repository contains sample microservice application written in python.
-The full workshop materials accompanying this repo is at http://bit.ly/os3work
+The app consists of:
+
+* Mongo database to store URLs to pictures
+* Flask backend, which searches the DB
+* ReactJS UI which queries the API and renders images
+* Scraper cronjob, which fetches new URLs from specified subreddits
+* Grafana dashboard to monitor the app
+
+Live demo is available at http://ui-catcatgo.e8ca.engint.openshiftapps.com/
