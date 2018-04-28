@@ -14,7 +14,6 @@ pymongo==3.4.0
 python-dateutil==2.7.2
 PyYAML==3.12
 requests==2.18.4
-rpm==4.14.1
 rsa==3.4.2
 six==1.11.0
 update-checker==0.16
