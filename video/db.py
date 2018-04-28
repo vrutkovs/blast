@@ -5,11 +5,12 @@ from pymongo.errors import ServerSelectionTimeoutError
 
 class Mongo():
 
-    def __init__(self, username, password, host, port):
+    def __init__(self, username, password, host, port, db):
         try:
-            self.client = MongoClient('mongodb://{}:{}@{}:{}/blast_video'
-                .format(username, password, host, port))
+            self.client = MongoClient('mongodb://{}:{}@{}:{}/{}'
+                .format(username, password, host, port, db))
             self.client.server_info()
+            self.db = db
         except ServerSelectionTimeoutError:
             print("Could not connect to mongo!", file=sys.stderr)
             self.client = None
@@ -17,7 +18,7 @@ class Mongo():
     def get(self, text):
         result = []
         if self.client:
-            collection = self.client.blast_video.video
+            collection = self.client[self.db].video
             for obj in collection.find({'title': {'$regex': text}}):
                 result.append(obj)
         return result
