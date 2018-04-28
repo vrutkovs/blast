@@ -1,3 +1,4 @@
 *.pyc
 __pycache__
 *.env
+praw_secret.json
