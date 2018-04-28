@@ -12,7 +12,7 @@ oc set probe deploymentconfig/ui --readiness --get-url=http://:8080/
 
 # create service account for the cron job
 oc create serviceaccount scraper
-oc policy add-role-to-user view -z scraper
+oc policy add-role-to-user edit -z scraper
 oc run scraper --schedule="0/5 * * * *" --image=soltysh/scraper --restart=Never
 
 # create all the templates for each component
