@@ -83,7 +83,7 @@ def get_mongo_client(mongodb_params):
 def save_item(client, db_name, collection_name, title, url):
     db = client.get_database(db_name)
     collection = db.get_collection(collection_name)
-    collection.update({'title': text, 'url': url}, upsert=True)
+    collection.update({'title': title, 'url': url}, upsert=True)
 
 
 if __name__ == '__main__':
