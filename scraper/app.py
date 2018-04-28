@@ -12,6 +12,8 @@ from pymongo.errors import ServerSelectionTimeoutError
 SERVICEACCOUNT_LOCATION = '/var/run/secrets/kubernetes.io/serviceaccount/'
 CONFIG_MAP = 'database-params'
 PRAW_SECRET = 'praw-secret'
+SUBREDDITS = os.getenv('SUBREDDIT') or 'aww'
+LIMIT = os.getenv('LIMIT') or 10
 
 def read_file(name):
     """
@@ -107,6 +109,5 @@ if __name__ == '__main__':
 
     # Fetch 10 links and store title and url in mongo
     reddit = get_reddit()
-    subreddit_name = os.getenv('SUBREDDIT') or 'aww'
-    for post in reddit.subreddit(subreddit_name).hot(limit=10):
+    for post in reddit.subreddit(SUBREDDITS).hot(limit=LIMIT):
         save_item(mongo_client, db, 'url', post.title, post.url)
