@@ -18,7 +18,7 @@ class Mongo():
     def get(self, text):
         result = []
         if self.client:
-            collection = self.client[self.db].text
+            collection = self.client[self.db].url
             for obj in collection.find({'title': {'$regex': text}}):
                 result.append(obj)
         return result
