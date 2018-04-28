@@ -69,7 +69,6 @@ def get_reddit():
     Creates a PRAW instance based on the client ID and client secret
     """
     client_id, client_secret = read_reddit_secret()
-    print(client_id, client_secret)
     return praw.Reddit(user_agent='catcatgo_parser',
                        client_id=client_id,
                        client_secret=client_secret)
