@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: Route
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+    openshift.io/host.generated: "true"
+  creationTimestamp: null
+  labels:
+    app: blast-ui-template
+    template: blast-ui
+  name: ui
+spec:
+  host: ui-catcatgo.e8ca.engint.openshiftapps.com
+  to:
+    kind: Service
+    name: ui
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: 2018-04-28T08:42:45Z
+      status: "True"
+      type: Admitted
+    host: ui-catcatgo.e8ca.engint.openshiftapps.com
+    routerName: router
+    wildcardPolicy: None

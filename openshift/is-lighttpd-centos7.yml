@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  annotations:
+    openshift.io/generated-by: OpenShiftNewApp
+    openshift.io/image.dockerRepositoryCheck: 2018-04-28T08:42:25Z
+  creationTimestamp: null
+  generation: 2
+  labels:
+    app: ui
+  name: lighttpd-centos7
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+  - annotations:
+      openshift.io/imported-from: soltysh/lighttpd-centos7
+    from:
+      kind: DockerImage
+      name: 172.30.16.196:5000/catcatgo/lighttpd-centos7:latest
+    generation: 2
+    importPolicy: {}
+    name: latest
+    referencePolicy:
+      type: Source
+status:
+  dockerImageRepository: ""

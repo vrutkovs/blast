@@ -1,0 +1,12 @@
+apiVersion: v1
+data:
+  MONGODB_ADMIN_PASSWORD: FCS3Rob0NARkN8FvaXqruhuP
+  MONGODB_DATABASE: catcatgo_db
+  MONGODB_PASSWORD: MYsRh2EuooIP3SKr5fPi20Bt
+  MONGODB_USER: POfruGIYljg284JaN6jcKUgs
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    app: database
+  name: database-params

@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Route
+metadata:
+  creationTimestamp: null
+  labels:
+    app: backend
+  name: v1-api
+spec:
+  host: api-catcatgo.e8ca.engint.openshiftapps.com
+  path: /api/v1.0/
+  port:
+    targetPort: web
+  to:
+    kind: Service
+    name: backend
+    weight: 100
+  wildcardPolicy: None
+status:
+  ingress:
+  - conditions:
+    - lastTransitionTime: 2018-04-28T12:56:51Z
+      status: "True"
+      type: Admitted
+    host: api-catcatgo.e8ca.engint.openshiftapps.com
+    routerName: router
+    wildcardPolicy: None

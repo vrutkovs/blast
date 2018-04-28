@@ -1,0 +1,24 @@
+apiVersion: v1
+groupNames:
+- dedicated-admins
+- system:serviceaccounts:dedicated-admin
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: admin
+  namespace: catcatgo
+roleRef:
+  name: admin
+subjects:
+- kind: User
+  name: vrutkovs@redhat.com
+- kind: ServiceAccount
+  name: grafana-hawkular
+  namespace: catcatgo
+- kind: Group
+  name: dedicated-admins
+- kind: SystemGroup
+  name: system:serviceaccounts:dedicated-admin
+userNames:
+- vrutkovs@redhat.com
+- system:serviceaccount:catcatgo:grafana-hawkular

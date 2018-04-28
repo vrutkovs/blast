@@ -1,0 +1,15 @@
+apiVersion: v1
+groupNames: null
+kind: RoleBinding
+metadata:
+  creationTimestamp: null
+  name: edit
+  namespace: catcatgo
+roleRef:
+  name: edit
+subjects:
+- kind: ServiceAccount
+  name: scraper
+  namespace: catcatgo
+userNames:
+- system:serviceaccount:catcatgo:scraper
