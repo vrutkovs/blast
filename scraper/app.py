@@ -23,9 +23,6 @@ def get_k8s_api():
     """
     Get k8s namespaced API
     """
-    # Read serviceaccount token
-    namespace = read_file('namespace')
-
     # Authenticate using token
     k8s.configuration.host = 'https://{}:{}'.format(
         os.getenv('KUBERNETES_SERVICE_HOST'),
@@ -39,6 +36,8 @@ def read_configmap():
     """
     Reads ConfigMap object storing secrets to databases.
     """
+    # Read serviceaccount token
+    namespace = read_file('namespace')
     # we're getting database configuration
     k8s_api = get_k8s_api()
     db_configmap = k8s_api.read_namespaced_config_map(CONFIG_MAP, namespace)
@@ -51,6 +50,8 @@ def read_reddit_secret():
     """
     Read PRAW data secret from k8s
     """
+    # Read serviceaccount token
+    namespace = read_file('namespace')
     k8s_api = get_k8s_api()
     praw_secret = k8s.CoreV1Api().read_namespaced_secret(PRAW_SECRET, namespace)
     return praw_secret.data['client_id'], praw_secret.data['client_secret'], \
