@@ -85,7 +85,7 @@ def save_item(client, db_name, collection_name, title, url):
     collection = db.get_collection(collection_name)
     # Use URL as a key, so that we wouldn't insert duplicates
     key = {'url': url}
-    data = {'title': title};
+    data = {'title': title, 'url': url};
     print("Saving '{}' - {}".format(title, url))
     collection.update(key, data, upsert=True)
 
