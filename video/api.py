@@ -16,11 +16,11 @@ api.decorators = [cors.crossdomain(
 class BlastVideo(Resource):
 
     def __init__(self):
-        if 'VIDEO_DB_SERVICE_HOST' in os.environ:
+        if 'DATABASE_SERVICE_HOST' in os.environ:
             self.db = Mongo(os.getenv('MONGODB_USER'), \
                 os.getenv('MONGODB_PASSWORD'), \
-                os.getenv('VIDEO_DB_SERVICE_HOST'), \
-                os.getenv('VIDEO_DB_SERVICE_PORT'))
+                os.getenv('DATABASE_SERVICE_HOST'), \
+                os.getenv('DATABASE_SERVICE_PORT'))
         else:
             self.db = Mongo('user', 'password', 'localhost', '27017')
 
