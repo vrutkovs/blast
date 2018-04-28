@@ -80,8 +80,10 @@ def get_mongo_client(mongodb_params):
     client.server_info()
     return client
 
-def save_item(client, db, collection, title, url):
-    client[db][collection].insert_one({'title': text, 'url': url})
+def save_item(client, db_name, collection_name, title, url):
+    db = client.get_database(db_name)
+    collection = db.get_collection(collection_name)
+    collection.update({'title': text, 'url': url}, upsert=True)
 
 
 if __name__ == '__main__':
@@ -103,7 +105,4 @@ if __name__ == '__main__':
     reddit = get_reddit()
     subreddit_name = os.getenv('SUBREDDIT') or 'aww'
     for post in reddit.subreddit(subreddit_name).hot(limit=10):
-        try:
-            save_item(mongo_client, db, 'url', post.title, post.url)
-        except Exception as e:
-            print(e)
+        save_item(mongo_client, db, 'url', post.title, post.url)
