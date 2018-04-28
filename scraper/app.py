@@ -60,7 +60,7 @@ def read_reddit_secret():
     result = {}
     for item in ['client_id', 'client_secret']:
         encoded = praw_secret.data[item]
-        result[item] = standard_b64decode(item).decode('utf-8')
+        result[item] = standard_b64decode(encoded).decode('utf-8')
 
     return list(result.values())
 
