@@ -65,8 +65,8 @@ def get_reddit():
     return praw.Reddit(user_agent='catcatgo_parser',
                        client_id=client_id,
                        client_secret=client_secret,
-                       username=username, \
-                       password=password)
+                       username=reddit_username, \
+                       password=reddit_password)
 
 def get_mongo_client(mongodb_params):
     client = MongoClient('mongodb://{user}:{passwd}@{host}:{port}/{db}'
