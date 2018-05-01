@@ -97,7 +97,7 @@ class SearchForm extends React.Component {
     var hostname = window.location.hostname
     var postfix = hostname.substring(hostname.indexOf("-"));
 
-    fetch('http://api' + postfix + "/api/v1.0/search/" + this.state.searchInput)
+    fetch('https://api' + postfix + "/api/v1.0/search/" + this.state.searchInput)
       .then(result=>result.json())
       .then(items=>this.setState({results: items}));
   }
