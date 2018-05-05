@@ -75,7 +75,7 @@ class SearchForm extends React.Component {
     super(props);
     this.state = {
       searchInput: '',
-      results: [],
+      results: null,
     };
 
     this.handleSearchInput = this.handleSearchInput.bind(this);
@@ -103,6 +103,12 @@ class SearchForm extends React.Component {
   }
 
   render() {
+    let searchResults;
+    if(this.state.results != null) {
+        searchResults = <SearchResults results={this.state.results} />
+    } else {
+        searchResults = null
+    }
     return (
       <div>
         <h3>CatCatGo</h3>
@@ -112,7 +118,7 @@ class SearchForm extends React.Component {
           onSearchSubmit={this.handleSearchSubmit}
         />
         <br />
-        <SearchResults results={this.state.results} />
+        {searchResults}
       </div>
     );
   }
