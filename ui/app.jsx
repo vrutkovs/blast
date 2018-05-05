@@ -104,13 +104,16 @@ class SearchForm extends React.Component {
 
   render() {
     let searchResults;
+    let searchClass;
     if(this.state.results != null) {
         searchResults = <SearchResults results={this.state.results} />
+        searchClass = null
     } else {
         searchResults = null
+        searchClass = 'search-center'
     }
     return (
-      <div>
+      <div className={searchClass}>
         <h3>CatCatGo</h3>
         <SearchBar
           searchInput={this.state.searchInput}
