@@ -13,11 +13,9 @@ spec:
   lookupPolicy:
     local: false
   tags:
-  - annotations:
-      openshift.io/imported-from: soltysh/lighttpd-centos7
-    from:
+  - from:
       kind: DockerImage
-      name: 172.30.16.196:5000/catcatgo/lighttpd-centos7:latest
+      name: soltysh/lighttpd-centos7
     generation: 2
     importPolicy: {}
     name: latest
