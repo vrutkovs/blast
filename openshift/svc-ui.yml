@@ -9,13 +9,12 @@ metadata:
   name: ui
 spec:
   ports:
-  - name: http
+  - name: http-ui
     port: 8080
     protocol: TCP
     targetPort: 8080
   selector:
     app: ui
-    deploymentconfig: ui
   sessionAffinity: None
   type: ClusterIP
 status:

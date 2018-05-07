@@ -7,12 +7,14 @@ metadata:
   generation: 1
   labels:
     app: backend
+    version: v1
   name: backend
 spec:
   replicas: 2
   revisionHistoryLimit: 10
   selector:
     name: backend
+    version: v1
   strategy:
     activeDeadlineSeconds: 21600
     resources: {}
@@ -31,6 +33,7 @@ spec:
       labels:
         app: backend
         name: backend
+        version: v1
     spec:
       containers:
       - env:
@@ -57,12 +60,7 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /api/v1.0/search/x
-            port: 8080
-            scheme: HTTP
+          name: http-backend
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1

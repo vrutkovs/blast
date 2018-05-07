@@ -1,0 +1,39 @@
+apiVersion: config.istio.io/v1alpha2
+kind: RouteRule
+metadata:
+  name: backend-default
+spec:
+  ## Used by services inside the Kubernetes cluster
+  destination:
+    name: backend
+  precedence: 1
+  route:
+  - labels:
+      app: backend
+      version: v1
+---
+apiVersion: config.istio.io/v1alpha2
+kind: RouteRule
+metadata:
+  name: ui-default
+spec:
+  destination:
+    name: ui
+  precedence: 1
+  route:
+  - labels:
+      app: ui
+      version: v1
+---
+apiVersion: config.istio.io/v1alpha2
+kind: RouteRule
+metadata:
+  name: database-default
+spec:
+  destination:
+    name: database
+  precedence: 1
+  route:
+  - labels:
+      app: database
+      version: v1

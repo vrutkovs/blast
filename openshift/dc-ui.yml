@@ -7,12 +7,14 @@ metadata:
   generation: 1
   labels:
     app: ui
+    version: v1
   name: ui
 spec:
   replicas: 2
   revisionHistoryLimit: 10
   selector:
     app: ui
+    version: v1
     deploymentconfig: ui
   strategy:
     activeDeadlineSeconds: 21600
@@ -31,31 +33,17 @@ spec:
       creationTimestamp: null
       labels:
         app: ui
+        version: v1
         deploymentconfig: ui
     spec:
       containers:
       - image: 172.30.16.196:5000/catcatgo/ui@sha256:1176c91db0df827cd6bd8a0ed3f486836a1a0ffa31ecc9501b1240ecc5f96006
         imagePullPolicy: Always
-        livenessProbe:
-          failureThreshold: 3
-          periodSeconds: 10
-          successThreshold: 1
-          tcpSocket:
-            port: 8080
-          timeoutSeconds: 1
         name: ui
         ports:
         - containerPort: 8080
           protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /
-            port: 8080
-            scheme: HTTP
-          periodSeconds: 10
-          successThreshold: 1
-          timeoutSeconds: 1
+          name: http-ui
         resources: {}
         terminationMessagePath: /dev/termination-log
         terminationMessagePolicy: File

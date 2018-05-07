@@ -7,12 +7,12 @@ metadata:
   namespace: catcatgo
 spec:
   ports:
-    - name: http
+    - name: http-backend
       port: 8080
       protocol: TCP
       targetPort: 8080
   selector:
-    name: backend
+    app: backend
   sessionAffinity: None
   type: ClusterIP
 status:

@@ -21,6 +21,7 @@ spec:
     contextDir: ui
     git:
       uri: https://github.com/vrutkovs/catcatgo.git
+      ref: istio
     type: Git
   strategy:
     sourceStrategy:

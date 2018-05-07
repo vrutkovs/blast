@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: gateway
+  namespace: catcatgo
+  annotations:
+    kubernetes.io/ingress.class: "istio"
+spec:
+  backend: null
+  tls: null
+  rules:
+  - host: ""
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: ui
+          servicePort: 8080
+      - path: /app.jsx
+        backend:
+          serviceName: ui
+          servicePort: 8080
+      - path: /api/.*
+        backend:
+          serviceName: backend
+          servicePort: 8080
+status:
+  loadbalancer:
+    ingress: null

@@ -9,12 +9,12 @@ metadata:
   name: database
 spec:
   ports:
-  - name: web
+  - name: tcp-mongo
     port: 27017
     protocol: TCP
     targetPort: 27017
   selector:
-    name: database
+    app: database
   sessionAffinity: None
   type: ClusterIP
 status:
