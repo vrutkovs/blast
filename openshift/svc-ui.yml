@@ -9,7 +9,7 @@ metadata:
   name: ui
 spec:
   ports:
-  - name: 8080-tcp
+  - name: http
     port: 8080
     protocol: TCP
     targetPort: 8080
