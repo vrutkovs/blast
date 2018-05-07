@@ -10,18 +10,9 @@ metadata:
     template: blast-ui
   name: ui
 spec:
-  host: ui-catcatgo.e8ca.engint.openshiftapps.com
+  host: ui-catcatgo.54.175.151.183.xip.io
   to:
     kind: Service
     name: ui
     weight: 100
   wildcardPolicy: None
-status:
-  ingress:
-  - conditions:
-    - lastTransitionTime: 2018-04-28T08:42:45Z
-      status: "True"
-      type: Admitted
-    host: ui-catcatgo.e8ca.engint.openshiftapps.com
-    routerName: router
-    wildcardPolicy: None

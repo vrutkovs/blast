@@ -6,7 +6,7 @@ metadata:
     app: backend
   name: v1-api
 spec:
-  host: api-catcatgo.e8ca.engint.openshiftapps.com
+  host: api-catcatgo.54.175.151.183.xip.io
   path: /api/v1.0/
   port:
     targetPort: web
@@ -15,12 +15,3 @@ spec:
     name: backend
     weight: 100
   wildcardPolicy: None
-status:
-  ingress:
-  - conditions:
-    - lastTransitionTime: 2018-04-28T12:56:51Z
-      status: "True"
-      type: Admitted
-    host: api-catcatgo.e8ca.engint.openshiftapps.com
-    routerName: router
-    wildcardPolicy: None

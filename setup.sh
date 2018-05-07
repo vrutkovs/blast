@@ -19,11 +19,13 @@ oc create -f pvc-database.yml
 oc create -f dc-database.yml
 oc create -f svc-database.yml
 
-oc create -f dc-backend.yml
+oc adm policy add-scc-to-user anyuid -z default
+oc adm policy add-scc-to-user privileged -z default
+oc apply -f <(istioctl kube-inject -f dc-backend.yml)
 oc create -f svc-backend.yml
-oc create -f route-backend.yml
+oc create -f route-api.yml
 
-oc create -f dc-ui.yml
+oc apply -f <(istioctl kube-inject -f dc-ui.yml)
 oc create -f svc-ui.yml
 oc create -f route-ui.yml
 
