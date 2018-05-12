@@ -6,14 +6,14 @@ metadata:
   creationTimestamp: null
   labels:
     app: ui
-  name: ui
+  name: ui-v2
 spec:
   failedBuildsHistoryLimit: 5
   nodeSelector: null
   output:
     to:
       kind: ImageStreamTag
-      name: ui:v1
+      name: ui:v2
   postCommit: {}
   resources: {}
   runPolicy: Serial
@@ -21,7 +21,7 @@ spec:
     contextDir: ui
     git:
       uri: https://github.com/vrutkovs/catcatgo.git
-      ref: istio
+      ref: istio-v2
     type: Git
   strategy:
     sourceStrategy:

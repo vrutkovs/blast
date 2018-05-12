@@ -7,14 +7,14 @@ metadata:
   generation: 1
   labels:
     app: ui
-    version: v1
-  name: ui
+    version: v2
+  name: ui-v2
 spec:
   replicas: 2
   revisionHistoryLimit: 10
   selector:
     app: ui
-    version: v1
+    version: v2
     deploymentconfig: ui
   strategy:
     activeDeadlineSeconds: 21600
@@ -33,11 +33,11 @@ spec:
       creationTimestamp: null
       labels:
         app: ui
-        version: v1
+        version: v2
         deploymentconfig: ui
     spec:
       containers:
-      - image: 172.30.16.196:5000/catcatgo/ui@sha256:1176c91db0df827cd6bd8a0ed3f486836a1a0ffa31ecc9501b1240ecc5f96006
+      - image: 172.30.16.196:5000/catcatgo/ui:v2
         imagePullPolicy: Always
         name: ui
         ports:
@@ -60,7 +60,7 @@ spec:
       - ui
       from:
         kind: ImageStreamTag
-        name: ui:v1
+        name: ui:v2
         namespace: catcatgo
     type: ImageChange
   - type: ConfigChange
