@@ -23,11 +23,7 @@ spec:
   gateways:
   - catacatgo-gateway
   http:
-  - fault:
-      delay:
-        fixedDelay: 3s
-        percent: 50
-    match:
+  - match:
     - uri:
         exact: /
     - uri:
@@ -38,11 +34,7 @@ spec:
     - destination:
         host: ui
         subset: v1
-  - fault:
-      abort:
-        httpStatus: 500
-        percent: 75
-    match:
+  - match:
     - uri:
         prefix: /api/v1.0/search/
     route:
