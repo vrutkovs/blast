@@ -1,8 +1,6 @@
 #!/bin/bash
 set -eux
 
-export PATH=$PATH:~/bin/istio-0.7.1/bin
-
 oc new-project catcatgo || oc project catcatgo
 
 oc create -f openshift/is-lighttpd-centos7.yml
