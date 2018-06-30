@@ -4,6 +4,8 @@ set -eux
 # Create catcatgo app bits
 oc new-project catcatgo || oc project catcatgo
 
+oc create serviceaccount scraper
+
 oc apply -f openshift/is-lighttpd-centos7.yml
 oc apply -f openshift/is-backend.yml
 oc apply -f openshift/is-scraper.yml
