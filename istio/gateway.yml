@@ -34,6 +34,11 @@ spec:
     - destination:
         host: ui
         subset: v1
+      weigth: 50
+    - destination:
+        host: ui
+        subset: v2
+      weigth: 50
   - match:
     - uri:
         prefix: /api/v1.0/search/
