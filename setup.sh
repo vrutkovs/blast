@@ -1,6 +1,7 @@
 #!/bin/bash
 set -eux
 
+# Create catcatgo app bits
 oc new-project catcatgo || oc project catcatgo
 
 oc create -f openshift/is-lighttpd-centos7.yml
@@ -31,9 +32,9 @@ oc create -f openshift/svc-ui.yml
 
 oc create -f openshift/cronjob-scraper.yml
 
+# Add istio rules
 oc create -f istio/route-rules.yml
-oc create -f istio/ingress.yml
-oc create -f istio/egress.yml
+oc create -f istio/gateway.yml
 
-oc delete route istio-ingress -n istio-system
-oc create route edge --service=istio-ingress --hostname=catcatgo.cloud.vrutkovs.eu -n istio-system
+oc delete route istio-ingressgateway -n istio-system
+oc create route edge --service=istio-ingressgateway --hostname=catcatgo.cloud.vrutkovs.eu -n istio-system
