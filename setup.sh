@@ -5,6 +5,7 @@ set -eux
 oc new-project catcatgo || oc project catcatgo
 
 oc create serviceaccount scraper
+oc create secret generic praw-secret --from-env-file=praw_secret.env
 
 oc apply -f openshift/is-lighttpd-centos7.yml
 oc apply -f openshift/is-backend.yml

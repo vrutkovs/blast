@@ -2,3 +2,4 @@
 __pycache__
 *.env
 praw_secret.json
+praw_secret.env
