@@ -23,15 +23,11 @@ spec:
   gateways:
   - catacatgo-gateway
   http:
-  - match:
-    - headers:
-        user-agent:
-          regex: ".*62.*"
-    route:
-    - destination:
-        host: ui
-        subset: v2
-  - match:
+  - fault:
+      delay:
+        fixedDelay: 3s
+        percent: 50
+    match:
     - uri:
         exact: /
     - uri:
@@ -42,7 +38,11 @@ spec:
     - destination:
         host: ui
         subset: v1
-  - match:
+  - fault:
+      abort:
+        httpStatus: 500
+        percent: 75
+    match:
     - uri:
         prefix: /api/v1.0/search/
     route:
