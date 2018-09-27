@@ -4,8 +4,10 @@ set -eux
 # Create catcatgo app bits
 oc new-project catcatgo || oc project catcatgo
 
-oc create serviceaccount scraper
-oc create secret generic praw-secret --from-env-file=praw_secret.env
+oc adm policy add-scc-to-user privileged -z default -n catcatgo
+
+oc create serviceaccount scraper || true
+oc create secret generic praw-secret --from-env-file=praw_secret.env || true
 
 oc apply -f openshift/is-lighttpd-centos7.yml
 oc apply -f openshift/is-backend.yml
@@ -39,5 +41,5 @@ oc apply -f openshift/cronjob-scraper.yml
 oc apply -f istio/route-rules.yml
 oc apply -f istio/gateway.yml
 
-oc delete route istio-ingressgateway -n istio-system
+oc delete route istio-ingressgateway -n istio-system || true
 oc create route edge --service=istio-ingressgateway --hostname=catcatgo.cloud.vrutkovs.eu -n istio-system
