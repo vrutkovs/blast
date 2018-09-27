@@ -43,4 +43,3 @@ spec:
     route:
     - destination:
         host: backend
-        subset: v1
