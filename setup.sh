@@ -27,4 +27,5 @@ oc create -f openshift/dc-ui.yml
 oc create -f openshift/svc-ui.yml
 oc create -f openshift/route-ui.yml
 
+oc create -f openshift/sa-scraper.yml
 oc create -f openshift/cronjob-scraper.yml
