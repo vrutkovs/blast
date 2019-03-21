@@ -61,8 +61,9 @@ def read_reddit_secret():
     # secrets are base64 encoded
     result = {}
     for item in ['client_id', 'client_secret', 'username', 'password']:
-        encoded = praw_secret.data[item]
-        result[item] = standard_b64decode(encoded).decode('utf-8')
+        encoded = praw_secret.data.get(item)
+        if encoded:
+            result[item] = standard_b64decode(encoded).decode('utf-8')
 
     return result
 
