@@ -29,3 +29,5 @@ oc create -f openshift/route-ui.yml
 
 oc create -f openshift/sa-scraper.yml
 oc create -f openshift/cronjob-scraper.yml
+
+oc create secret generic praw-secret --from-env-file=praw_secret.env
